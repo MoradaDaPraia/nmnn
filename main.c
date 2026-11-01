@@ -1,10 +1,12 @@
-#include "lib/shared/message.h"
+#include "lib/decode.h"
 #include <stdio.h>
 
 int main(void) {
-	const char *message = message_get();
+	uint8_t buf[64];
 
-	printf("%s\n", message);
+	instr_t *instr = instr_decode(0x00008067, buf, sizeof(buf));
+
+	printf("%d\n", instr->format);
 
 	return 0;
 }
