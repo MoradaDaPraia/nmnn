@@ -2,12 +2,9 @@
 #define DECODE_H
 
 #include "constants.h"
+#include "state.h"
 #include <stddef.h>
 #include <stdint.h>
-
-typedef struct {
-	instrformat_t format;
-} instr_t;
 
 typedef struct {
 	instrformat_t format;
@@ -70,7 +67,7 @@ typedef struct {
 	imm_t imm;
 } instrj_t;
 
-instr_t *instr_decode(uint32_t raw, uint8_t *buf, size_t buf_size);
+void instr_decode(state_t *state);
 
 instrish_t instri_to_instrish(const instri_t *instri);
 

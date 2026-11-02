@@ -13,6 +13,12 @@ typedef uint8_t opcode_t;
 
 typedef uint32_t imm_t;
 
+typedef uint8_t exec_t;
+
+typedef struct {
+	instrformat_t format;
+} instr_t;
+
 #define INSTRFORMAT_I ((instrformat_t)1)
 #define INSTRFORMAT_S ((instrformat_t)2)
 #define INSTRFORMAT_B ((instrformat_t)3)
@@ -105,5 +111,46 @@ typedef uint32_t imm_t;
 #define IMMI_ARITHMETIC ((imm_t)0x20)
 #define IMMI_ECALL ((imm_t)0x00)
 #define IMMI_EBREAK ((imm_t)0x01)
+
+#define EXEC_LUI ((exec_t)1)
+#define EXEC_AUIPC ((exec_t)2)
+#define EXEC_JAL ((exec_t)3)
+#define EXEC_JALR ((exec_t)4)
+#define EXEC_BEQ ((exec_t)5)
+#define EXEC_BNE ((exec_t)6)
+#define EXEC_BLT ((exec_t)7)
+#define EXEC_BGE ((exec_t)8)
+#define EXEC_BLTU ((exec_t)9)
+#define EXEC_BGEU ((exec_t)10)
+#define EXEC_LB ((exec_t)11)
+#define EXEC_LH ((exec_t)12)
+#define EXEC_LW ((exec_t)13)
+#define EXEC_LBU ((exec_t)14)
+#define EXEC_LHU ((exec_t)15)
+#define EXEC_SB ((exec_t)16)
+#define EXEC_SH ((exec_t)17)
+#define EXEC_SW ((exec_t)18)
+#define EXEC_ADDI ((exec_t)19)
+#define EXEC_SLTI ((exec_t)20)
+#define EXEC_SLTIU ((exec_t)21)
+#define EXEC_XORI ((exec_t)22)
+#define EXEC_ORI ((exec_t)23)
+#define EXEC_ANDI ((exec_t)24)
+#define EXEC_SLLI ((exec_t)25)
+#define EXEC_SRLI ((exec_t)26)
+#define EXEC_SRAI ((exec_t)27)
+#define EXEC_ADD ((exec_t)28)
+#define EXEC_SUB ((exec_t)29)
+#define EXEC_SLL ((exec_t)30)
+#define EXEC_SLT ((exec_t)31)
+#define EXEC_SLTU ((exec_t)32)
+#define EXEC_XOR ((exec_t)33)
+#define EXEC_SRL ((exec_t)34)
+#define EXEC_SRA ((exec_t)35)
+#define EXEC_OR ((exec_t)36)
+#define EXEC_AND ((exec_t)37)
+#define EXEC_FENCE ((exec_t)38)
+#define EXEC_ECALL ((exec_t)39)
+#define EXEC_EBREAK ((exec_t)40)
 
 #endif
