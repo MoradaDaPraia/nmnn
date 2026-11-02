@@ -1,8 +1,8 @@
 #ifndef EXECUTE_H
 #define EXECUTE_H
 
-#include <stdint.h>
+#include "state.h"
 
-void execute(uint32_t raw);
+void execute(state_t state);
 
 #endif
