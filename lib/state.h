@@ -7,6 +7,7 @@ typedef struct {
 	uint32_t encoded_instr;
 	instr_t *instr;
 	exec_t exec;
+	uint32_t regs[32];
 } state_t;
 
 state_t *state_init(void);

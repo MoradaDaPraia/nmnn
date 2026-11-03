@@ -1,6 +1,7 @@
 #include "state.h"
 #include "decode.h"
 #include <stdlib.h>
+#include <string.h>
 
 state_t *state_init(void) {
 	state_t *state = malloc(sizeof(state_t));
@@ -8,6 +9,7 @@ state_t *state_init(void) {
 	state->encoded_instr = 0;
 	state->instr = NULL;
 	state->exec = 0;
+	memset(state->regs, 0, sizeof(state->regs));
 
 	return state;
 }

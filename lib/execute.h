@@ -3,6 +3,6 @@
 
 #include "state.h"
 
-void execute(state_t state);
+void execute(state_t *state);
 
 #endif
