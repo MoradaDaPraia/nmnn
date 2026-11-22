@@ -4,20 +4,28 @@
 #include <stdint.h>
 
 typedef struct {
-	uint8_t heap[4096];
-} leaf_t;
-
-typedef struct __node_t {
-	struct __node_t *nodes[16];
-	leaf_t **leaves;
-} node_t;
-
-typedef struct {
-	node_t *head;
+	uint32_t *data;
+	uint32_t size;
 } memory_t;
 
-void load_batch(uint32_t address, void *start, uint32_t size);
+memory_t *memory_init(void);
 
-void store_batch(uint32_t address, void *start, uint32_t size);
+void memory_deinit(memory_t **memory_ptr);
+
+void load_batch(memory_t *memory, uint32_t address, void *start, uint32_t size);
+
+void store_batch(memory_t *memory, uint32_t address, void *start, uint32_t size);
+
+uint8_t load_byte(memory_t *memory, uint32_t address);
+
+void store_byte(memory_t *memory, uint32_t address, uint8_t byte);
+
+uint16_t load_half(memory_t *memory, uint32_t address);
+
+void store_half(memory_t *memory, uint32_t address, uint16_t half);
+
+uint32_t load_word(memory_t *memory, uint32_t address);
+
+void store_word(memory_t *memory, uint32_t address, uint32_t word);
 
 #endif

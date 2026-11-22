@@ -6,9 +6,12 @@
 state_t *state_init(void) {
 	state_t *state = malloc(sizeof(state_t));
 
+	state->memory = memory_init();
 	state->encoded_instr = 0;
 	state->instr = NULL;
 	state->exec = 0;
+	state->pc = 0;
+	state->next_pc = 0;
 	memset(state->regs, 0, sizeof(state->regs));
 
 	return state;
@@ -22,6 +25,7 @@ void state_deinit(state_t **state_ptr) {
 	state_t *state = *state_ptr;
 
 	instr_deinit(&(state->instr));
+	memory_deinit(&(state->memory));
 
 	free(state);
 	*state_ptr = NULL;

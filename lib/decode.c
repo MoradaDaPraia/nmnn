@@ -178,7 +178,7 @@ instrish_t instri_to_instrish(const instri_t *instri) {
 	instrish.rs1 = instri->rs1;
 	instrish.rd = instri->rd;
 	instrish.shamt = (uint8_t)util_extract((uint32_t)instri->imm, 4, 0);
-	instrish.imm = (imm_t)util_extract((uint32_t)instri->imm, 11, 5) << 5;
+	instrish.imm = (funct_t)util_extract((uint32_t)instri->imm, 11, 5);
 
 	return instrish;
 }

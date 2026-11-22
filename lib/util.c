@@ -18,3 +18,12 @@ uint32_t util_extend_signed(uint32_t value, uint8_t bits) {
 
 	return (value ^ sign) - sign;
 }
+
+uint32_t util_clear_bits(uint32_t value, uint8_t bits) {
+	if (bits >= 32) {
+		return 0;
+	}
+
+	return value & (UINT32_MAX << bits);
+}
+
