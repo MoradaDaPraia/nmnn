@@ -140,9 +140,12 @@ static void executer(state_t *state) {
 	uint32_t rs1 = state->regs[instrr->rs1];
 	uint32_t rs2 = state->regs[instrr->rs2];
 	uint8_t shamt = (uint8_t)(rs2 & 0x1f);
-	uint32_t result = 0;
+	uint32_t result = state->regs[instrr->rd];
 
 	switch (state->exec) {
+	case EXEC_CMOV:
+		result = rs2 != 0 ? rs1 : result;
+		break;
 	case EXEC_ADD:
 		result = rs1 + rs2;
 		break;
@@ -240,4 +243,6 @@ void execute(state_t *state) {
 	default:
 		break;
 	}
+
+	state->regs[REG_ZERO] = 0;
 }

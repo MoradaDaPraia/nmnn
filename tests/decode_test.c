@@ -62,6 +62,18 @@ static void test_decoded_instruction_fields(void) {
 	assert(r->rs2 == 2);
 	assert(r->rd == 3);
 
+	/* Custom R-type: cmov x3, x1, x2 */
+	state->encoded_instr = 0x0020818b;
+	decode(state);
+	r = (const instrr_t *)state->instr;
+	assert(r->format == INSTRFORMAT_R);
+	assert(r->opcode == 0x0b);
+	assert(r->funct3 == 0);
+	assert(r->funct7 == 0);
+	assert(r->rs1 == 1);
+	assert(r->rs2 == 2);
+	assert(r->rd == 3);
+
 	/* U-type: lui x3, 0x12345 */
 	state->encoded_instr = 0x123451b7;
 	decode(state);
@@ -143,6 +155,7 @@ static void test_decode_exec_selection(void) {
 	    {0x4020d1b3, EXEC_SRA},    /* sra x3, x1, x2 */
 	    {0x0020e1b3, EXEC_OR},     /* or x3, x1, x2 */
 	    {0x0020f1b3, EXEC_AND},    /* and x3, x1, x2 */
+	    {0x0020818b, EXEC_CMOV},   /* custom cmov x3, x1, x2 */
 	    {0x123451b7, EXEC_LUI},    /* lui x3, 0x12345 */
 	    {0x12345197, EXEC_AUIPC},  /* auipc x3, 0x12345 */
 	    {0x008001ef, EXEC_JAL},    /* jal x3, 8 */

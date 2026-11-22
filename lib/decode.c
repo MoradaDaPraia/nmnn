@@ -22,6 +22,7 @@ static instrformat_t instrformat_from_opcode(opcode_t opcode) {
 		instrformat = INSTRFORMAT_B;
 		break;
 	case OPCODER_REG:
+	case OPCODE_CUSTOM:
 		instrformat = INSTRFORMAT_R;
 		break;
 	case OPCODEU_AUIPC:
@@ -427,6 +428,12 @@ static void instr_select(state_t *state) {
 				break;
 			default:
 				break;
+			}
+			break;
+		case OPCODE_CUSTOM:
+			if (instrr->funct3 == FUNCT3_CUSTOM_CMOV &&
+			    instrr->funct7 == FUNCT7_CUSTOM_CMOV) {
+				state->exec = EXEC_CMOV;
 			}
 			break;
 		default:

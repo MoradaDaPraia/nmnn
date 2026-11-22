@@ -65,6 +65,7 @@ typedef struct {
 #define OPCODEI_IMM ((opcode_t)0x13)
 #define OPCODEI_JALR ((opcode_t)0x67)
 #define OPCODEI_SYSTEM ((opcode_t)0x73)
+#define OPCODE_CUSTOM ((opcode_t)0x0B)
 #define OPCODES_STORE ((opcode_t)0x23)
 #define OPCODEB_BRANCH ((opcode_t)0x63)
 #define OPCODER_REG ((opcode_t)0x33)
@@ -106,6 +107,8 @@ typedef struct {
 
 #define FUNCT7R_NORMAL ((funct_t)0x00)
 #define FUNCT7R_ALTERNATE ((funct_t)0x20)
+#define FUNCT3_CUSTOM_CMOV ((funct_t)0x00)
+#define FUNCT7_CUSTOM_CMOV ((funct_t)0x00)
 
 #define IMMI_LOGICAL ((imm_t)0x00)
 #define IMMI_ARITHMETIC ((imm_t)0x20)
@@ -152,5 +155,6 @@ typedef struct {
 #define EXEC_FENCE ((exec_t)38)
 #define EXEC_ECALL ((exec_t)39)
 #define EXEC_EBREAK ((exec_t)40)
+#define EXEC_CMOV ((exec_t)41)
 
 #endif

@@ -197,6 +197,28 @@ static void test_upper_and_jump_operations(void) {
 	state_deinit(&state);
 }
 
+static void test_cmov(void) {
+	state_t *state = state_init();
+	state->regs[1] = 0x12345678;
+	state->regs[2] = 1;
+	state->regs[3] = 0xAAAAAAAA;
+	run_instruction(state, 0x0020818b); /* cmov x3, x1, x2 */
+	assert(state->regs[3] == 0x12345678);
+
+	state->regs[1] = 0x87654321;
+	state->regs[2] = 0;
+	state->regs[3] = 0xAAAAAAAA;
+	run_instruction(state, 0x0020818b); /* cmov x3, x1, x2 */
+	assert(state->regs[3] == 0xAAAAAAAA);
+
+	state->regs[1] = 0x87654321;
+	state->regs[2] = 1;
+	run_instruction(state, 0x0020800b); /* cmov x0, x1, x2 */
+	assert(state->regs[REG_ZERO] == 0);
+
+	state_deinit(&state);
+}
+
 int main(void) {
 	test_loads();
 	test_immediate_arithmetic();
@@ -205,5 +227,6 @@ int main(void) {
 	test_branches();
 	test_register_operations();
 	test_upper_and_jump_operations();
+	test_cmov();
 	return 0;
 }
