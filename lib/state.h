@@ -11,10 +11,13 @@ typedef struct {
 	uint32_t regs[32];
 	uint32_t pc;
 	uint32_t next_pc;
+	uint32_t text_end;
 	memory_t *memory;
 } state_t;
 
 state_t *state_init(void);
+
+void state_load_text(state_t *state, const uint32_t *text, uint32_t word_count);
 
 void state_deinit(state_t **state_ptr);
 

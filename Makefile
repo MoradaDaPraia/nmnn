@@ -1,5 +1,6 @@
-CC=clang
+CC=gcc
 CFLAGS=-g -std=c11 -Wall -Wextra -Wpedantic -Wstrict-prototypes -Wvla
+RELEASE_CFLAGS=-O3 -DNDEBUG -std=c11 -Wall -Wextra -Wpedantic -Wstrict-prototypes -Wvla
 LDFLAGS=-lm
 
 LIB_DIR=lib
@@ -28,6 +29,8 @@ MAIN_TARGET=$(addprefix run_target_, $(notdir $(basename $(MAIN_BIN))))
 
 all: $(MAIN_BIN)
 
+release: $(BIN_DIR)/out
+
 test: $(TESTS_BINS)
 
 run: $(MAIN_TARGET)
@@ -54,6 +57,11 @@ $(MAIN_OBJECT): $(MAIN_SOURCE) $(OBJECTS_DIR)
 
 $(MAIN_BIN): $(MAIN_OBJECT) $(LIB_OBJECTS) $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $< $(LIB_OBJECTS) $(VENDOR_OBJECTS) $(LDFLAGS)
+
+
+
+$(BIN_DIR)/out: $(MAIN_SOURCE) $(LIB_SOURCES) $(BIN_DIR)
+	$(CC) $(RELEASE_CFLAGS) -o $@ $(MAIN_SOURCE) $(LIB_SOURCES) $(VENDOR_OBJECTS) $(LDFLAGS)
 
 $(OBJECTS_DIR)/%.o: $(LIB_DIR)/%.c
 	@mkdir -p $(dir $@)
